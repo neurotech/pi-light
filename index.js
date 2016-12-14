@@ -26,11 +26,11 @@ board.on('ready', function () {
     handler: function (request, reply) {
       if (request.params.command === 'on') {
         torch.pulse(step);
-        reply('Light ON');
+        reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
-        torch.off();
-        reply('Light OFF');
+        torch.toggle();
+        reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
         reply('Form your request properly!');
