@@ -8,5 +8,8 @@
   "repository": "https://github.com/neurotech/pi-light.git",
   "dependencies": {
     "hapi": "^16.0.1"
+  },
+  "devDependencies": {
+    "semistandard": "^9.2.1"
   }
 }
