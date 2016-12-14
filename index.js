@@ -29,7 +29,7 @@ board.on('ready', function () {
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
-        torch.stop();
+        torch.stop().off();
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
