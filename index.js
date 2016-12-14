@@ -21,7 +21,8 @@ board.on('ready', function () {
     path: '/light/{command}',
     handler: function (request, reply) {
       if (request.params.command) {
-        console.log(`Request: ${request.params.command.toUpperCase()}`);
+        var now = new Date().toLocaleTimeString('en-GB', { hour: 'numeric', minute: 'numeric' });
+        console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
         torch.pulse(step);
