@@ -32,7 +32,9 @@ board.on('ready', function () {
         torch.off();
         reply('Light OFF');
       }
-      reply('Form your request properly.');
+      if (request.params.command !== 'on' && request.params.command !== 'off') {
+        reply('Form your request properly!');
+      }
     }
   });
 
