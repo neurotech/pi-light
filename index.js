@@ -1,10 +1,10 @@
-const raspi = require('raspi-io');
+const Raspi = require('raspi-io');
 const five = require('johnny-five');
 const Hapi = require('hapi');
 
 const server = new Hapi.Server();
 const board = new five.Board({
-  io: new raspi(),
+  io: new Raspi(),
   repl: false
 });
 
@@ -25,25 +25,21 @@ board.on('ready', function () {
     path: '/light/{command}',
     handler: function (request, reply) {
       if (request.params.command === 'on') {
-	torch.pulse(step);
+        torch.pulse(step);
         reply('Light ON');
       }
       if (request.params.command === 'off') {
         torch.off();
-	reply('Light OFF');
+        reply('Light OFF');
       }
       reply('Form your request properly.');
     }
   });
 
   server.start((err) => {
-    if (err) {
-      throw err;
-    }
+    if (err) { throw err; }
     console.log(`Server running at: ${server.info.uri}`);
   });
 
-  this.on('exit', function () {
-    torch.off();
-  });
+  this.on('exit', function () { torch.off(); });
 });
