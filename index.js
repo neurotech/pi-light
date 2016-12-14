@@ -20,6 +20,9 @@ board.on('ready', function () {
     method: 'POST',
     path: '/light/{command}',
     handler: function (request, reply) {
+      if (request.params.command) {
+        console.log(`Request: ${request.params.command.toUpperCase()}`);
+      }
       if (request.params.command === 'on') {
         torch.pulse(step);
         reply(`Light ${request.params.command.toUpperCase()}`);
