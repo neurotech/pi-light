@@ -34,10 +34,10 @@ board.on('ready', function () {
     }
   });
 
-  server.start((err) => {
-    if (err) { throw err; }
-    console.log(`Server running at: ${server.info.uri}`);
-  });
-
   this.on('exit', function () { torch.off(); });
+});
+
+server.start((err) => {
+  if (err) { throw err; }
+  console.log(`Server running at: ${server.info.uri}`);
 });
