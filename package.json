@@ -1,0 +1,8 @@
+{
+  "name": "pi-light",
+  "version": "0.0.1",
+  "description": "An application to control an RGB LED strip.",
+  "main": "index.js",
+  "author": "Tim Douglas <neurotech@gmail.com>",
+  "license": "MIT"
+}
