@@ -4,5 +4,6 @@
   "description": "An application to control an RGB LED strip.",
   "main": "index.js",
   "author": "Tim Douglas <neurotech@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/neurotech/pi-light.git"
 }
