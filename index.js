@@ -14,10 +14,6 @@ let step = 2000;
 server.connection({ port: process.env.PI_LIGHT_HTTP_PORT });
 
 board.on('ready', function () {
-
-});
-
-board.on('ready', function () {
   let torch = new five.Led(pin);
 
   server.route({
