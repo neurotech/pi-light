@@ -1,20 +1,16 @@
 const five = require('johnny-five');
-const Raspi = require('raspi-io');
 const Hapi = require('hapi');
 
 const server = new Hapi.Server();
-const board = new five.Board({
-  io: new Raspi(),
-  repl: false
-});
+const board = new five.Board({ repl: false });
 
-let pin = 'P1-12';
-let step = 2000;
+let pin = [6, 5, 3];
 
 server.connection({ port: process.env.PI_LIGHT_HTTP_PORT });
 
 board.on('ready', function () {
-  let torch = new five.Led(pin);
+  var torch = new five.Led.RGB(pin);
+  var rainbow = ['FF0000', 'FF7F00', 'FFFF00', '00FF00', '0000FF', '4B0082', '8F00FF'];
 
   server.route({
     method: 'POST',
@@ -25,11 +21,11 @@ board.on('ready', function () {
         console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
-        torch.pulse(step);
+        torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
-        torch.stop().off();
+        torch.off();
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
