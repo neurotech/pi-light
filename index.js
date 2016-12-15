@@ -16,12 +16,13 @@ board.on('ready', function () {
     method: 'POST',
     path: '/light/{command}',
     handler: function (request, reply) {
+      var spectrum = null;
       if (request.params.command) {
         var now = new Date().toLocaleTimeString('en-GB', { hour: 'numeric', minute: 'numeric' });
         console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
-        var spectrum = setInterval(() => {
+        spectrum = setInterval(() => {
           torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
         }, 400);
         reply(`Light ${request.params.command.toUpperCase()}`);
