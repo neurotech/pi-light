@@ -22,14 +22,16 @@ board.on('ready', function () {
         console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
-        spectrum = setInterval(() => {
+        var looper = board.loop(150, function () {
           torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
-        }, 400);
+        });
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
-        torch.off();
-        clearInterval(spectrum);
+        looper();
+        setTimeout(function () {
+          torch.off();
+        }, 1000);
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
