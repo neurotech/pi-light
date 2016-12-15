@@ -10,10 +10,6 @@ server.connection({ port: process.env.PI_LIGHT_HTTP_PORT });
 
 board.on('ready', function () {
   var torch = new five.Led.RGB(pins);
-  var servo = new five.Servo({
-    pin: 10,
-    type: 'continuous'
-  });
   var rainbow = ['FF0000', 'FF7F00', 'FFFF00', '00FF00', '0000FF', '4B0082', '8F00FF'];
 
   server.route({
@@ -26,12 +22,10 @@ board.on('ready', function () {
       }
       if (request.params.command === 'on') {
         torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
-        servo.cw(1);
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
         torch.off();
-        servo.stop();
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
