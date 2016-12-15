@@ -21,10 +21,14 @@ board.on('ready', function () {
         console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
-        torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
+        var rotate = function () {
+          torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
+        };
+        board.loop(200, rotate());
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
+        rotate();
         torch.off();
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
