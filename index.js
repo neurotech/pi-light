@@ -28,8 +28,8 @@ board.on('ready', function () {
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
-        clearInterval(spectrum);
         torch.off();
+        clearInterval(spectrum);
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command !== 'on' && request.params.command !== 'off') {
