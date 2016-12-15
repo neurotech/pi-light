@@ -4,12 +4,12 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 const board = new five.Board({ repl: false });
 
-let pin = [6, 5, 3];
+let pins = [6, 5, 3];
 
 server.connection({ port: process.env.PI_LIGHT_HTTP_PORT });
 
 board.on('ready', function () {
-  var torch = new five.Led.RGB(pin);
+  var torch = new five.Led.RGB(pins);
   var rainbow = ['FF0000', 'FF7F00', 'FFFF00', '00FF00', '0000FF', '4B0082', '8F00FF'];
 
   server.route({
@@ -21,10 +21,13 @@ board.on('ready', function () {
         console.log(`[${now}] Request: ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'on') {
-        torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
+        var spectrum = setInterval(() => {
+          torch.color(rainbow[Math.floor(Math.random() * rainbow.length)]);
+        }, 400);
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
       if (request.params.command === 'off') {
+        clearInterval(spectrum);
         torch.off();
         reply(`Light ${request.params.command.toUpperCase()}`);
       }
