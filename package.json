@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": "https://github.com/neurotech/pi-light.git",
   "dependencies": {
-    "hapi": "^16.0.1",
+    "hapi": "^17.0.0",
     "johnny-five": "^0.10.6"
   },
   "devDependencies": {
